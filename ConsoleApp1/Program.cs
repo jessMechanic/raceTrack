@@ -1,15 +1,15 @@
-﻿using ConsoleApp2;
+﻿
 
-namespace ConsoleApp1
+using controller;
+
+namespace consoleProj
 {
     class write
     {
-             public static int[] numbers = {1,2, 3, 4, 5, 6, 7, 8, 9, 10};
+            
        public static void Main(String[] args) {
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                Console.Write( $"\n{numbers[i]}");
-            }
+            Data.Initialize();
+            Console.WriteLine(Data.competition);
         }
     }
 }

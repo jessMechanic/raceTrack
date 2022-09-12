@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace model
 {
-    internal interface IEquipment
+    public interface IEquipment
     {
         public int Quality { get; set; }
         public int Performance { get; set; }

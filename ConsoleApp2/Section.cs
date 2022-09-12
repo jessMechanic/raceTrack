@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace model
 {
-    enum SectionTypes
+   public enum SectionTypes
     {
         Straight,
         LeftCornor,
@@ -14,8 +14,13 @@ namespace model
         StartGrid,
         Finish
     }
-    internal class Section
+    public class Section
     {
+        public Section(SectionTypes sectionType)
+        {
+            SectionType = sectionType;
+        }
+
         public SectionTypes SectionType { get; set; }
     }
 }
