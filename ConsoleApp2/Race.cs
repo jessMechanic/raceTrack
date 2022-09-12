@@ -8,7 +8,7 @@ namespace model
 
   
 {
-    internal class Race
+    public class Race
     {
       public Track Track ;
       public List<IParticipant> participants ;
@@ -17,7 +17,11 @@ namespace model
       private Random _random;
       private Dictionary<Section, SectionData> _positions;
 
-    public Race(Track track, List<IParticipant> participants)
+        public override string ToString()
+        {
+            return Track.Name;
+        }
+        public Race(Track track, List<IParticipant> participants)
         {
             Track = track;
             this.participants = participants;

@@ -5,16 +5,24 @@ namespace controller
     public static class Data
     {
         public static Competition competition;
-
+       public static Race? CurrentRace;
         public  static void Initialize()
         {
             competition = new Competition(); 
             addRacers(); 
             addtracks();
+            NextRace();
 
 
         }
-           
+        public static void NextRace()
+        {
+           Track track = competition.NextTrack();
+            if(track != null)
+            {
+                CurrentRace = new Race(track, competition.Participants);
+            }
+        }
         public static void addRacers()
         {
             

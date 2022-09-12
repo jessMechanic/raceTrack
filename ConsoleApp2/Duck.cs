@@ -10,7 +10,7 @@ namespace model
     {
            public String toString()
         {
-            return ($"Duck [ Quality: {Quality} , performance : {Performance}   ");
+            return ($"Duck [ Quality: {Quality} , performance : {Performance}   ]");
         }
 
         public int Quality { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

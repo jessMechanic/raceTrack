@@ -8,7 +8,10 @@ namespace model
 {
     public class Driver : IParticipant   
     {
-       public static Driver standart = new Driver("null", 1, new Duck(), TeamColors.Red);
+        public override string ToString()
+        {
+            return ($"Duck [ name: {Name} , Points : {Points}  ] ");
+        }
         public Driver(string name, int points, IEquipment equipment, TeamColors teamColor)
         {
             Name = name;

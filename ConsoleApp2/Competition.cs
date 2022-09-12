@@ -11,9 +11,8 @@ namespace model
         public List<IParticipant> Participants { get; set; }
         public Queue<Track> Tracks { get; set; }
 
-        public Track NextTrack()
-        {
-            return null;
-        }
+        public Track NextTrack() => Tracks.Any() ? Tracks.Dequeue() : null;
+
+
     }
 }

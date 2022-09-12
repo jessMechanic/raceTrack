@@ -1,6 +1,7 @@
 ﻿
 
 using controller;
+using model;
 
 namespace consoleProj
 {
@@ -9,7 +10,14 @@ namespace consoleProj
             
        public static void Main(String[] args) {
             Data.Initialize();
-            Console.WriteLine(Data.competition);
+            foreach(IParticipant part in   Data.competition.Participants)
+            {
+                Console.WriteLine(part.ToString());
+            }
+            Console.WriteLine(Data.CurrentRace);
+            Data.NextRace();
+            Console.WriteLine(Data.CurrentRace);
+
         }
     }
 }
