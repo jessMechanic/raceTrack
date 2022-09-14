@@ -19,14 +19,14 @@ namespace ControllerTest
             _competition.Tracks = new Queue<Track>();
         }
 
-        
+        [Test]
         public void NextTrack_EmptyQueue_ReturnNull()
         {
             Track result = _competition.NextTrack();
             Assert.IsNull(result);
         }
 
-       
+        [Test]
         public void NextTrack_OneInQueue_ReturnTrack()
         {
             SectionTypes[] Sections0 = { SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Finish };
@@ -36,7 +36,7 @@ namespace ControllerTest
             Assert.That(track, Is.EqualTo(result));
         }
 
-       
+        [Test]
         public void NextTrack_OneInQueue_RemoveTrackFromQueue()
         {
             SectionTypes[] Sections0 = { SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Finish };

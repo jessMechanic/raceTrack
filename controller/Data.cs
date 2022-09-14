@@ -34,11 +34,17 @@ namespace controller
         public static void addtracks()
         {
             
-            SectionTypes[] Sections2 = {  SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor,SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight,  SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor };
+            SectionTypes[] Sections1 = {  SectionTypes.StartGrid, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor,SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight,  SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor,SectionTypes.Finish };
+            Track track1 = (new Track("the pond", Sections1));
+            track1.startPosition = new System.Numerics.Vector2(3, 3);
+
+            SectionTypes[] Sections2 = { SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.Straight,SectionTypes.RightCornor,SectionTypes.LeftCornor,SectionTypes.Straight,SectionTypes.Straight, SectionTypes.LeftCornor,SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.Finish };
             Track track2 = (new Track("the pond", Sections2));
-            track2.startPosition = new System.Numerics.Vector2(3, 3);
+            track2.startPosition = new System.Numerics.Vector2(0, 1);
+
+
             competition.Tracks.Enqueue(track2);
-            competition.Tracks.Enqueue(track2);
+            competition.Tracks.Enqueue(track1);
 
 
         }

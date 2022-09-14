@@ -13,13 +13,9 @@ namespace consoleProj
             Data.Initialize();
             Track nextTrack = Data.competition.NextTrack();
             Console.Write("here should be printed");
-            if (nextTrack != null)
-            {
-                
-                visualisation.DrawTrack(nextTrack);
-                                     
-            }
-            
+            visualisation.DrawTrack(nextTrack);
+
+
 
 
 

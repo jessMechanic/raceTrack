@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,54 +12,66 @@ namespace consoleProj
 {
     static class visualisation
     {
-        public static Race CurrentRace;
+        
         #region graphics
 
         static string[] straight_horizontal = {"         ",
-                                              "=========",
-                                              "     #  ",  
-                                              "  #     ", 
-                                              "=========",
-                                              "        ",};
+                                              "===========",
+                                              "~~#~~~~~~~~",
+                                              "~~~~~~#~~~~", 
+                                              "===========",
+                                              "         ",};
 
-        static string[] straight_vertical = {" ||    ||", 
-                                               " ||    ||",
-                                               " ||    ||",
-                                               " ||#  #||",
-                                               " ||    ||",
-                                               " ||    ||",};
-        static string[] start_vertical;
-        static string[] start_horizontal;
+        static string[] straight_vertical =   {" ||~~~~||",
+                                               " ||#~~~||",
+                                               " ||~~~~||",
+                                               " ||~~~~||",
+                                               " ||~~~#||",
+                                               " ||~~~~||",};
+
+
+        static string[] Start_horizontal =   {"         ",
+                                              "===========",
+                                              "~~~~#█ ~~~~",
+                                              "~#~~~ █~~~~",
+                                              "===========",
+                                              "         ",};
+        static string[] Start_vertical =      {" ||~~~~||",
+                                               " ||█ █ ||",
+                                               " || █ █||",
+                                               " ||#~~~||",
+                                               " ||~~~~||",
+                                               " ||~~~#||",};
         static string[] turnDown_Left = {"         ",
                                          "====--,",
-                                          "    # \\\\", 
-                                          "       ''",
-                                          "= #    ||", 
-                                          " \\\\    ||",
-                                          "  ||    ||" };
+                                          "~~~~~#\\\\",
+                                          "~~~~~~~''",
+                                          "=~#~~~~||",
+                                          " \\\\~~~~||",
+                                          " ||~~~~||" };
 
 
         static string[] turnDown_Right = {  "           ",
-                                            "    ,--====",
-                                            "  //  #    ",
-                                            " ''        ",
-                                            " ||   #  ,=",
-                                            " ||    //  " };
+                                            "   _,--====",
+                                            "  //#~~~~~~",
+                                            " ''~~~~~~~~",
+                                            " ||~~~~~~,=",
+                                            " ||~~~#//  " };
         
         
-        static string[] turnUp_Left = { 
-                                        " //    ||" ,
-                                        "=`  #  || " ,
-                                        "       || " ,
-                                        "  #   //  ",
+        static string[] turnUp_Left = {
+                                        " //#~~~||" ,
+                                        "=`~~~~~|| " ,
+                                        "~~~~~~~|| " ,
+                                        "~~#~~~//  ",
                                         "====--`  " ,
                                         "           "};
-        static string[] turnUp_Right = { 
-                                         " ||    \\\\   ",
-                                         " ||   #  `= ",
-                                         " ||        ",
-                                         "  \\\\  #    ",
-                                         "    `--====",
+        static string[] turnUp_Right = {
+                                         " ||~~~~\\\\   ",
+                                         " ||~~~~~#`==",
+                                         " ||~#~~~~~~",
+                                         "  \\\\~~~~~~~",
+                                         "   ``--====",
                                         "           "};
 
 
@@ -74,12 +87,24 @@ namespace consoleProj
         }
 
         public static void DrawTrack(Track track)
-        {    //initiolize variables
+        {
+            if (track != null)
+            {
+
+                
+
+            
+
+            //initiolize variables
             TrackPlaces = new string[8, 8,6];
             Vector2 position = track.startPosition;
             Vector2 direction = new Vector2(1, 0);
             LinkedList<Section> sections = track.Sections;
-            
+
+
+
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.Clear();
             for (int i = 0; i < sections.Count; i++)
             {
                 SectionTypes curSection = sections.ElementAt(i).SectionType;
@@ -88,7 +113,26 @@ namespace consoleProj
                 string[] sectionToDraw = straight_horizontal;
                 switch (curSection)
                 {
-                    case SectionTypes.Straight:
+
+
+                        case SectionTypes.StartGrid:
+                        case    SectionTypes.Finish:
+                            {
+                                if (Math.Abs(direction.Y) == 1)
+                                {
+                                    sectionToDraw = Start_vertical;
+
+                                    break;
+                                }
+                                if (Math.Abs(direction.X) == 1)
+                                {
+                                    sectionToDraw = Start_horizontal;
+
+                                    break;
+                                }
+                                break;
+                            }
+                        case SectionTypes.Straight:
                         {
                             if (Math.Abs (direction.Y) == 1)
                             {
@@ -164,19 +208,50 @@ namespace consoleProj
                             }
                             break;
                         }
-                }
+                    }
+                
+
+
 
 
 
 
                 for (int j = 0; j < sectionToDraw.Length; j++)
                 {
-                 //Console.SetCursorPosition((int)( i * 9), (int)( j));
-               Console.SetCursorPosition((int)(position.X * 9), (int)(position.Y * 6 + j));
-                 Console.Write(sectionToDraw[j]);
-                 
+                    //Console.SetCursorPosition((int)( i * 9), (int)( j));
+
+
+
+                    for (int index = 0; index < sectionToDraw[j].Length; index++)
+                    {
+                        Console.SetCursorPosition((int)(position.X * 11 + index), (int)(position.Y * 6 + j));
+                        char c = sectionToDraw[j][index];
+
+
+
+                        if (c == '~' || c == '#')
+                        {
+                            Console.BackgroundColor = ConsoleColor.Blue;
+                             if(c == '~')
+                            {
+                                c = ' ';
+                            }
+                        }
+                        else if (c != ' ')
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkGreen;
+                            Console.ForegroundColor = ConsoleColor.White;
+
+                        }
+                        else {
+                            Console.BackgroundColor = ConsoleColor.Green;
+                        }
+                            Console.Write(c);
+                    }
+                    
+
                 }
-                
+
                 position += direction;
 
 
@@ -185,6 +260,7 @@ namespace consoleProj
 
 
 
+            }
             }
             Thread.Sleep(Timeout.Infinite);
         }
