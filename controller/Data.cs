@@ -8,7 +8,8 @@ namespace controller
        public static Race? CurrentRace;
         public  static void Initialize()
         {
-            competition = new Competition(); 
+            competition = new Competition();
+            competition.Tracks = new Queue<Track>();
             addRacers(); 
             addtracks();
             NextRace();
@@ -32,15 +33,14 @@ namespace controller
         }
         public static void addtracks()
         {
-            Section[] Sections0 = { new Section(SectionTypes.StartGrid), new Section(SectionTypes.Straight), new Section(SectionTypes.LeftCornor), new Section(SectionTypes.Straight), new Section(SectionTypes.LeftCornor), new Section(SectionTypes.Straight), new Section(SectionTypes.LeftCornor), new Section(SectionTypes.Finish) };
-            addTrack(new Track("the pond", new LinkedList<Section>(Sections0)));
+            
+            SectionTypes[] Sections2 = {  SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor,SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight,  SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor };
+            Track track2 = (new Track("the pond", Sections2));
+            track2.startPosition = new System.Numerics.Vector2(3, 3);
+            competition.Tracks.Enqueue(track2);
+            competition.Tracks.Enqueue(track2);
 
-            Section[] Sections1 = { new Section(SectionTypes.StartGrid), new Section(SectionTypes.Straight), new Section(SectionTypes.Straight), new Section(SectionTypes.Finish) };
-            addTrack(new Track("river", new LinkedList<Section>(Sections1)));
 
-
-            Section[] Sections2 = { new Section(SectionTypes.StartGrid), new Section(SectionTypes.Straight), new Section(SectionTypes.LeftCornor), new Section(SectionTypes.Straight), new Section(SectionTypes.RightCornor), new Section(SectionTypes.Finish) };
-            addTrack(new Track("marshes", new LinkedList<Section>(Sections1)));
         }
 
 

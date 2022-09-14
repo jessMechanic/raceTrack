@@ -2,6 +2,7 @@
 
 using controller;
 using model;
+using System.Drawing;
 
 namespace consoleProj
 {
@@ -10,13 +11,17 @@ namespace consoleProj
             
        public static void Main(String[] args) {
             Data.Initialize();
-            foreach(IParticipant part in   Data.competition.Participants)
+            Track nextTrack = Data.competition.NextTrack();
+            Console.Write("here should be printed");
+            if (nextTrack != null)
             {
-                Console.WriteLine(part.ToString());
+                
+                visualisation.DrawTrack(nextTrack);
+                                     
             }
-            Console.WriteLine(Data.CurrentRace);
-            Data.NextRace();
-            Console.WriteLine(Data.CurrentRace);
+            
+
+
 
         }
     }

@@ -16,4 +16,9 @@
     <PackageReference Include="coverlet.collector" Version="3.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleApp2\model.csproj" />
+    <ProjectReference Include="..\controller\controller.csproj" />
+  </ItemGroup>
+
 </Project>
