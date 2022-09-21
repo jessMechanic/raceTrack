@@ -12,7 +12,9 @@ namespace controller
             competition.Tracks = new Queue<Track>();
             addRacers(); 
             addtracks();
-    
+            NextRace();
+
+
 
 
 
@@ -51,8 +53,8 @@ namespace controller
             Track track3 = (new Track("the river", Sections3));
 
             competition.Tracks.Enqueue(track0);
-            competition.Tracks.Enqueue(track1);
             competition.Tracks.Enqueue(track2);
+            competition.Tracks.Enqueue(track1);
             competition.Tracks.Enqueue(track3);
 
 

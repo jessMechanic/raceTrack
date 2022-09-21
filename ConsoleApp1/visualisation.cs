@@ -120,7 +120,7 @@ namespace consoleProj
 
                     
                         position = new Vector2(-MinX , -MinY );
-                    direction = _race.Track.startDirection;
+                        direction = _race.Track.startDirection;
 
                     for (int i = 0; i < sections.Count; i++)
                     {
@@ -310,9 +310,9 @@ namespace consoleProj
 
                                     Console.Write(c) ;
 
-
+                                   
                                 }
-
+                                      Thread.Sleep(40);
 
                             }
                         }
@@ -325,11 +325,11 @@ namespace consoleProj
                     position += direction;
                     MinX = MinX < position.X ? MinX : position.X;
                     MinY = MinY < position.Y ? MinY : position.Y;
-
+                      
                     }
+                        
 
-
-                }
+                } 
             }
 
        

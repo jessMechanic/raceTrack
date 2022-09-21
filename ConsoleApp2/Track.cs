@@ -30,17 +30,14 @@ namespace model
 
             return list;
         }
-        public Track(String name, SectionTypes[] SectionsIn,Vector2 vectorin)
+        public Track(String name, SectionTypes[] SectionsIn)
         {
             Name = name;
             Sections = convertToList(SectionsIn);
             ThemeColor =  ConsoleColor.Green;
             TrackBoundry = ConsoleColor.DarkGreen;
-            startDirection = vectorin;
+            startDirection = new Vector2(1, 0);
         }
-           public Track(String name, SectionTypes[] SectionIn)
-        {
-             new Track(name, SectionIn, new Vector2(1, 0));
-        }
+        
     }
 }
