@@ -11,7 +11,10 @@ namespace model
     {
         public string Name { get; set; }
         public LinkedList<Section> Sections { get; set; }
-        public Vector2 startPosition;
+        public Voliage[] VoliagesTrack;
+        public Vector2 startDirection;
+        public ConsoleColor ThemeColor;
+        public ConsoleColor TrackBoundry;
         public override string ToString()
         {
             return Name;
@@ -27,11 +30,17 @@ namespace model
 
             return list;
         }
-        public Track(String name, SectionTypes[] SectionsIn)
+        public Track(String name, SectionTypes[] SectionsIn,Vector2 vectorin)
         {
             Name = name;
             Sections = convertToList(SectionsIn);
+            ThemeColor =  ConsoleColor.Green;
+            TrackBoundry = ConsoleColor.DarkGreen;
+            startDirection = vectorin;
         }
-        
+           public Track(String name, SectionTypes[] SectionIn)
+        {
+             new Track(name, SectionIn, new Vector2(1, 0));
+        }
     }
 }

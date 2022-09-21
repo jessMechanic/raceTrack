@@ -19,11 +19,7 @@ namespace model
             Equipment = equipment;
             TeamColor = teamColor;
         }
-         public ConsoleColor getConsoleColor()
-        {
-            ConsoleColor[] colors = { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Gray, ConsoleColor.Blue };
-            return colors[(int)(TeamColor)];
-        }
+         
         public string Name { get; set; }
         public int Points { get; set; }
         public IEquipment Equipment { get; set; }

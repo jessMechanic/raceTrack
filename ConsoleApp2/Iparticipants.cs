@@ -7,13 +7,23 @@ using System.Threading.Tasks;
 
 namespace model
 {
+    public static class enumHelper
+    {
+       
+        public static ConsoleColor toConsoleColor(this TeamColors color)
+        {
+            ConsoleColor[] colors = { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Yellow, ConsoleColor.Gray, ConsoleColor.Blue,ConsoleColor.Cyan };
+            return colors[(int)(color)];
+        }
+    }
     public enum TeamColors
     {
         Red,
         Green,
         Yellow,
         Grey,
-        Blue
+        Blue,
+        Cyan
 
     }
     public interface IParticipant
@@ -22,7 +32,7 @@ namespace model
         public int Points { get; set; }
         public IEquipment Equipment { get; set; }
         public TeamColors TeamColor { get; set; }
-        public ConsoleColor getConsoleColor();
+
 
     }
 }
