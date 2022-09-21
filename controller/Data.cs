@@ -13,6 +13,7 @@ namespace controller
             addRacers(); 
             addtracks();
             NextRace();
+        ;
 
 
         }
@@ -27,19 +28,22 @@ namespace controller
         public static void addRacers()
         {
             
-            addParticipants(new Driver("duck", 1, new Duck(), TeamColors.Blue));
-            addParticipants(new Driver("goose", 1, new Duck(), TeamColors.Blue));
+            addParticipants(new Driver("duck", 1, new Duck(), TeamColors.Green));
+            addParticipants(new Driver("goose", 1, new Duck(), TeamColors.Red));
             addParticipants(new Driver("swan", 1, new Duck(), TeamColors.Yellow));
+
+            addParticipants(new Driver("duck1", 1, new Duck(), TeamColors.Green));
+            addParticipants(new Driver("goose2", 1, new Duck(), TeamColors.Red));
         }
         public static void addtracks()
         {
             
-            SectionTypes[] Sections1 = {  SectionTypes.StartGrid, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor,SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight,  SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor,SectionTypes.Finish };
+            SectionTypes[] Sections1 = { SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor,SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight,  SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor,SectionTypes.Finish };
             Track track1 = (new Track("the pond", Sections1));
             track1.startPosition = new System.Numerics.Vector2(3, 3);
 
-            SectionTypes[] Sections2 = { SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.Straight,SectionTypes.RightCornor,SectionTypes.LeftCornor,SectionTypes.Straight,SectionTypes.Straight, SectionTypes.LeftCornor,SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.Finish };
-            Track track2 = (new Track("the pond", Sections2));
+            SectionTypes[] Sections2 = { SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.Straight,SectionTypes.RightCornor,SectionTypes.LeftCornor,SectionTypes.Straight,SectionTypes.Straight, SectionTypes.LeftCornor,SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.Finish };
+            Track track2 = (new Track("the river", Sections2));
             track2.startPosition = new System.Numerics.Vector2(0, 1);
 
 

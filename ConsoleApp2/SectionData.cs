@@ -14,5 +14,9 @@ namespace model
         public IParticipant Right { get; set; }
         public int DistanceRight { get; set; }
 
+        public override string ToString()
+        {
+            return $"left : {(Left != null ? Left.Name : " none ")} ; right : {(Right !=  null ? Right.Name:" none ")}";
+        }
     }
 }

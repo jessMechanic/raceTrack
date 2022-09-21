@@ -22,5 +22,9 @@ namespace model
         }
 
         public SectionTypes SectionType { get; set; }
+        public override string ToString()
+        {
+            return SectionType.ToString();
+        }
     }
 }

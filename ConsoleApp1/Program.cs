@@ -11,9 +11,14 @@ namespace consoleProj
             
        public static void Main(String[] args) {
             Data.Initialize();
-            Track nextTrack = Data.competition.NextTrack();
+
+            
+                     
+            Track nextTrack = Data.competition.NextTrack(); 
+            Data.CurrentRace.PlaceParticipants();
             Console.Write("here should be printed");
-            visualisation.DrawTrack(nextTrack);
+            visualisation.Initialize(Data.CurrentRace);
+            visualisation.DrawTrack();
 
 
 
