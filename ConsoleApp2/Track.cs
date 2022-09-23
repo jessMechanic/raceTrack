@@ -15,6 +15,7 @@ namespace model
         public Vector2 startDirection;
         public ConsoleColor ThemeColor;
         public ConsoleColor TrackBoundry;
+        public ConsoleColor TrackColor;
         public override string ToString()
         {
             return Name;
@@ -36,6 +37,7 @@ namespace model
             Sections = convertToList(SectionsIn);
             ThemeColor =  ConsoleColor.Green;
             TrackBoundry = ConsoleColor.DarkGreen;
+            TrackColor = ConsoleColor.Blue;
             startDirection = new Vector2(1, 0);
         }
         

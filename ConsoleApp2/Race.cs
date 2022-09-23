@@ -61,7 +61,7 @@ namespace model
                 }
             }
             int spacesReserved = (startgridPosition + 1) * 2;
-            if (spacesReserved > Participants.Count)
+            if (spacesReserved >= Participants.Count)
             {
                 
                 for (int i = spacesReserved - Participants.Count, j = 0; i < spacesReserved; i++,j++)
@@ -78,12 +78,21 @@ namespace model
                     _positions[trackSections.ElementAt(i / 2)] = sectionData;
                      
                 }
-                
+
+            }
+            else
+            {
+                Console.WriteLine("not enough place");
+                Console.WriteLine($"space reserved : {spacesReserved} < {Participants.Count} ");
             }
             
             
             
 
+
+        }
+        public void DrawParticipants()
+        {
 
         }
        public void  RandomizeEquipment()

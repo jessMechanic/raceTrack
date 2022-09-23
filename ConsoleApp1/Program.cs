@@ -11,12 +11,15 @@ namespace consoleProj
             
        public static void Main(String[] args) {
             Data.Initialize();
-            Data.NextRace(); 
+            Data.NextRace(); Data.NextRace();
             Data.CurrentRace.PlaceParticipants();
+
+
             visualisation.Initialize(Data.CurrentRace);
             visualisation.DrawTrack();
-           
-       
+            Console.Clear();
+            visualisation.DrawTrack();
+
             Thread.Sleep(-1);
 
 

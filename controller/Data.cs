@@ -33,8 +33,9 @@ namespace controller
             addParticipants(new Driver("duck", 1, new Duck(), TeamColors.Blue));
             addParticipants(new Driver("goose", 1, new Duck(), TeamColors.Red));
             addParticipants(new Driver("swan", 1, new Duck(), TeamColors.Yellow));
+            addParticipants(new Driver("swan", 1, new Duck(), TeamColors.Cyan));
 
-        
+
         }
         public static void addtracks()
         {
@@ -46,8 +47,9 @@ namespace controller
 
             SectionTypes[] Sections2 = { SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.LeftCornor,SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCornor,SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCornor };
             Track track2 = (new Track("8-ball", Sections2));
-            track2.TrackBoundry = ConsoleColor.DarkRed;
-            track2.ThemeColor = ConsoleColor.Red;
+            track2.TrackBoundry = ConsoleColor.White;
+            track2.ThemeColor = ConsoleColor.Green;
+            track2.TrackColor = ConsoleColor.Black;
 
             SectionTypes[] Sections3 = {SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.Straight,SectionTypes.RightCornor,SectionTypes.LeftCornor,SectionTypes.Straight,SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.Finish };
             Track track3 = (new Track("the river", Sections3));
