@@ -8,7 +8,8 @@ using System.Linq;
 using System.Numerics;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
+
+using System.Timers;
 
 namespace consoleProj
 {
@@ -59,8 +60,9 @@ namespace consoleProj
                                             "   _,--====",
                                             "  //1~~~~~~",
                                             " ''~~~~~~~~",
-                                            " ||~~~~~~,=",
-                                            " ||~~~2//  " };
+                                            " ||~~~~2~,=",
+                                            " ||~~~~//  ",
+                                            " ||~~~~||" };
 
 
         static string[] turnUp_Left = {
@@ -89,8 +91,13 @@ namespace consoleProj
         {
             _race = race;
             _racePos = null;
+            _race.RaceTimer.Elapsed += OnTimedEvent;
         }
+        public static void OnTimedEvent(object sender, ElapsedEventArgs e)
+        {
+            DrawTrack();
 
+        }
         public static void DrawTrack()
         {
             Track track = _race.Track;
@@ -116,7 +123,7 @@ namespace consoleProj
                 float MinX = 0;
                 float MinY = 0;
 
-                Thread.Sleep(100);
+              
 
                 for (int n = 0; n < 2; n++)
                 {
@@ -173,7 +180,7 @@ namespace consoleProj
 
                 for (int index = 0; index < sectionToDraw[j].Length; index++)
                 {
-                    Console.SetCursorPosition((int)(position.X * 11 + index), (int)(position.Y * 6 + j));
+                    Console.SetCursorPosition((int)(position.X * 11 + index), (int)(position.Y * 7 + j));
                     char c = sectionToDraw[j][index];
 
                     int face = (int)(direction.X + direction.Y);

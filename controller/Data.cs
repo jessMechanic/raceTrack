@@ -6,6 +6,8 @@ namespace controller
     {
         public static Competition competition;
         public static Race? CurrentRace;
+
+        
         public  static void Initialize()
         {
             competition = new Competition();
@@ -29,11 +31,12 @@ namespace controller
         }
         public static void addRacers()
         {
-            
+            Duck superDuck = new Duck();
+            superDuck.Speed = 1000;
             addParticipants(new Driver("duck", 1, new Duck(), TeamColors.Blue));
             addParticipants(new Driver("goose", 1, new Duck(), TeamColors.Red));
             addParticipants(new Driver("swan", 1, new Duck(), TeamColors.Yellow));
-            addParticipants(new Driver("swan", 1, new Duck(), TeamColors.Cyan));
+            addParticipants(new Driver("swan", 1, superDuck, TeamColors.Cyan));
 
 
         }
@@ -41,23 +44,35 @@ namespace controller
         {
             
             SectionTypes[] Sections1 = {SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor,SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight,  SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.Straight };
-            Track track0 = (new Track("dummyTrack", Sections1));
-            Track track1 = (new Track("the pond", Sections1));
+            Track dummyTrack = (new Track("dummyTrack", Sections1));
+
+
+
+            Track ThePond = (new Track("the pond", Sections1));
 
 
             SectionTypes[] Sections2 = { SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.LeftCornor,SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCornor,SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.LeftCornor };
-            Track track2 = (new Track("8-ball", Sections2));
-            track2.TrackBoundry = ConsoleColor.White;
-            track2.ThemeColor = ConsoleColor.Green;
-            track2.TrackColor = ConsoleColor.Black;
+            Track ball = (new Track("8-ball", Sections2));
+            ball.TrackBoundry = ConsoleColor.White;
+            ball.ThemeColor = ConsoleColor.Green;
+            ball.TrackColor = ConsoleColor.Black;
 
             SectionTypes[] Sections3 = {SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.Straight,SectionTypes.RightCornor,SectionTypes.LeftCornor,SectionTypes.Straight,SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.Finish };
-            Track track3 = (new Track("the river", Sections3));
+            Track river = (new Track("the river", Sections3));
 
-            competition.Tracks.Enqueue(track0);
-            competition.Tracks.Enqueue(track2);
-            competition.Tracks.Enqueue(track1);
-            competition.Tracks.Enqueue(track3);
+
+
+            SectionTypes[] Sections4 = {SectionTypes.RightCornor,SectionTypes.StartGrid,SectionTypes.RightCornor,SectionTypes.RightCornor,SectionTypes.Straight, SectionTypes.RightCornor };
+            Track babyPark = (new Track("BabyPart", Sections4));
+            babyPark.Rounds = 8;
+            babyPark.startDirection = new System.Numerics.Vector2(0, 1);
+
+
+            competition.Tracks.Enqueue(dummyTrack);
+            competition.Tracks.Enqueue(babyPark);
+            competition.Tracks.Enqueue(ThePond);
+            competition.Tracks.Enqueue(river);
+            competition.Tracks.Enqueue(ball);
 
 
         }

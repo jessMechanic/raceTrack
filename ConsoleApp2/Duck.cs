@@ -13,9 +13,19 @@ namespace model
             return ($"Duck [ Quality: {Quality} , performance : {Performance}   ]");
         }
 
-        public int Quality { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Performance { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Speed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool isBroken { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Duck()
+        {
+            Quality = 1;
+            Performance = 1;
+            Speed = 80;
+            isBroken = false;
+        }
+       
+
+       public int Quality { get; set; }
+        public int Performance { get ; set ; }
+        public int Speed { get ; set ; }
+        public bool isBroken { get  ; set ; }
+        public int BreakChange { get; set; }
     }
 }

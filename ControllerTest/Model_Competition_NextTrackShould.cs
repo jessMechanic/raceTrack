@@ -1,4 +1,5 @@
-﻿using model;
+﻿using controller;
+using model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,15 @@ namespace ControllerTest
     public class Model_Competition_NextTrackShould
     {
          Competition _competition;
+        Track track0;
 
         [SetUp]
         public void SetUp()
         {
             _competition = new Competition();
             _competition.Tracks = new Queue<Track>();
+            SectionTypes[] Sections0 = { SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Finish };
+            track0 = (new Track("the pond", Sections0));
         }
 
         [Test]
@@ -61,6 +65,17 @@ namespace ControllerTest
             Assert.That(track0, Is.EqualTo(results));
             results = _competition.NextTrack();
             Assert.That(track1, Is.EqualTo(results));
+        }
+        [Test]
+        public void PlaceParticipants()
+        {
+            _competition.Participants = new List<IParticipant>();
+            _competition.Participants.Add(new Driver("duck", 1, new Duck(), TeamColors.Blue));
+            _competition.Participants.Add(new Driver("goose", 1, new Duck(), TeamColors.Red));
+            _competition.Participants.Add(new Driver("swan", 1, new Duck(), TeamColors.Yellow));
+            _competition.Participants.Add(new Driver("swan", 1, new Duck(), TeamColors.Cyan));
+            Race testRace = new Race(track0, _competition.Participants);
+            testRace.PlaceParticipants();
         }
     }
 }
