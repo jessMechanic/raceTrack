@@ -10,11 +10,16 @@ using System.Reflection;
 using System.Text;
 
 using System.Timers;
+using System.Xml.Linq;
 
 namespace consoleProj
 {
     static class visualisation
     {
+
+       
+
+
 
         private static Race _race;
         private static Vector2? _racePos;
@@ -37,14 +42,14 @@ namespace consoleProj
 
         static string[] Start_horizontal =   {"         ",
                                               "===========",
-                                              "~1~~~~~~~█ ",
-                                              "~~~~~~~2~ █",
+                                              "~1~~~█ ~~~~",
+                                              "~~~~~ █~~2~",
                                               "===========",
                                               "         ",};
-        static string[] Start_vertical =      {" ||~~~~||",
+        static string[] Start_vertical =      {" ||~~~~||", 
+                                               " ||1~~~||",
                                                " ||█ █ ||",
                                                " || █ █||",
-                                               " ||1~~~||",
                                                " ||~~~~||",
                                                " ||~~~2||",};
         static string[] turnDown_Left = {"         ",
@@ -61,8 +66,8 @@ namespace consoleProj
                                             "  //1~~~~~~",
                                             " ''~~~~~~~~",
                                             " ||~~~~2~,=",
-                                            " ||~~~~//  ",
-                                            " ||~~~~||" };
+                                            " ||~~~~//  "
+                                          };
 
 
         static string[] turnUp_Left = {
@@ -92,6 +97,13 @@ namespace consoleProj
             _race = race;
             _racePos = null;
             _race.RaceTimer.Elapsed += OnTimedEvent;
+            _race.DriversChanged += OnDriversChanged;
+            
+        }
+
+        private static void OnDriversChanged(object sender, DriversChangedEventArgs e)
+        {
+            DrawTrack();
         }
         public static void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
@@ -119,7 +131,7 @@ namespace consoleProj
                 ConsoleColor trackColor = _race.Track.TrackColor;
 
                 Console.BackgroundColor = themeColor;
-                Console.Clear();
+                //Console.Clear();
                 float MinX = 0;
                 float MinY = 0;
 
@@ -164,8 +176,12 @@ namespace consoleProj
 
                 } 
             }
+            if (debugLines.enables)
+            {
+              printDebug();
+            }
 
-       
+            _race.Busy = false;
         }
 
         private static void drawSections(Vector2 position, Vector2 direction, LinkedList<Section> sections, ConsoleColor themeColor, ConsoleColor boundryColor, ConsoleColor trackColor, int i, string[] sectionToDraw)
@@ -180,7 +196,7 @@ namespace consoleProj
 
                 for (int index = 0; index < sectionToDraw[j].Length; index++)
                 {
-                    Console.SetCursorPosition((int)(position.X * 11 + index), (int)(position.Y * 7 + j));
+                    Console.SetCursorPosition((int)(position.X * 11 + index), (int)(position.Y * 6 + j ));
                     char c = sectionToDraw[j][index];
 
                     int face = (int)(direction.X + direction.Y);
@@ -196,7 +212,7 @@ namespace consoleProj
                                 if (sd.Right != null)
                                 {
                                     Console.BackgroundColor = sd.Right.TeamColor.toConsoleColor();
-                                    c = '░';
+                                    c = !sd.Right.Equipment.isBroken ? '░' : 'x' ;
                                     break;
                                 }
                             }
@@ -205,7 +221,7 @@ namespace consoleProj
                                 if (sd.Left != null)
                                 {
                                     Console.BackgroundColor = sd.Left.TeamColor.toConsoleColor();
-                                    c = '░';
+                                    c = !sd.Left.Equipment.isBroken ? '░' : 'x';
                                     break;
                                 }
                             }
@@ -218,7 +234,7 @@ namespace consoleProj
                                 if (sd.Right != null)
                                 {
                                     Console.BackgroundColor = sd.Right.TeamColor.toConsoleColor();
-                                    c = '░';
+                                    c = !sd.Right.Equipment.isBroken ? '░' : 'x';
                                     break;
                                 }
                             }
@@ -227,7 +243,7 @@ namespace consoleProj
                                 if (sd.Left != null)
                                 {
                                     Console.BackgroundColor = sd.Left.TeamColor.toConsoleColor();
-                                    c = '░';
+                                    c = !sd.Left.Equipment.isBroken ? '░' : 'x'; ;
                                     break;
                                 }
                             }
@@ -253,9 +269,33 @@ namespace consoleProj
 
 
             }
+
+
+          
+        }
+      private static void printDebug()
+        {
+
+            List<string> debugLine = debugLines.returnList() ;
+            Console.SetCursorPosition(80,1);
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("||================debug=============||");
+            for (int i = 0; i < debugLine.Count; i++)
+            {
+                Console.SetCursorPosition(80 , i + 2);
+                Console.Write("||");
+                Console.Write(debugLine.ElementAt(i));
+
+                Console.SetCursorPosition(80+ 36, i + 2);
+                Console.Write("||");
+            }
+            //debugLines.clear();
+
+
+
         }
 
-        private static void selectSectionSprite(ref Vector2 direction, SectionTypes curSection, ref string[] sectionToDraw)
+private static void selectSectionSprite(ref Vector2 direction, SectionTypes curSection, ref string[] sectionToDraw)
         {
             switch (curSection)
             {

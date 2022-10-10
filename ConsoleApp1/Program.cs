@@ -11,25 +11,18 @@ namespace consoleProj
             
        public static void Main(String[] args) {
             Data.Initialize();
+
+            /* Data.CurrentRace.PlaceParticipants();
+             visualisation.Initialize(Data.CurrentRace);
+             visualisation.DrawTrack();*/
+            Data.InalizeVisualization += visualisation.Initialize;
+
             Data.NextRace();
-
-            
-          
-            
-            
            
 
-             Data.CurrentRace.PlaceParticipants();
 
-           
-            visualisation.Initialize(Data.CurrentRace);
-
-             visualisation.DrawTrack();
-              Data.CurrentRace.startTimer();
+            debugLines.enables = true;
             Thread.Sleep(-1);
-
-
-
 
         }
     }
