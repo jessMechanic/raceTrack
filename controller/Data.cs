@@ -29,7 +29,6 @@ namespace controller
             {
                 CurrentRace = new Race(track, new List<IParticipant>( competition.Participants));
                 InalizeVisualization?.Invoke(CurrentRace);
-                Console.Clear();
                 CurrentRace.PlaceParticipants();
                 CurrentRace.NextRaceEvent += CurrentRace_NextRaceEvent;
                 CurrentRace.startTimer();

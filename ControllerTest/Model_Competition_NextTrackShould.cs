@@ -71,12 +71,14 @@ namespace ControllerTest
         public void PlaceParticipants()
         {
             _competition.Participants = new List<IParticipant>();
-            _competition.Participants.Add(new Driver("duck", 1, new Duck(), TeamColors.Blue));
-            _competition.Participants.Add(new Driver("goose", 1, new Duck(), TeamColors.Red));
-            _competition.Participants.Add(new Driver("swan", 1, new Duck(), TeamColors.Yellow));
-            _competition.Participants.Add(new Driver("swan", 1, new Duck(), TeamColors.Cyan));
+            for(int i = 0; i < 10; i++) { 
+                _competition.Participants.Add(new Driver("duck", 1, new Duck(), TeamColors.Blue));
+            }
+            
+            
             Race testRace = new Race(track0, _competition.Participants);
             testRace.PlaceParticipants();
+          
         }
     }
 }

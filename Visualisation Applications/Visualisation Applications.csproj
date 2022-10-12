@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>Visualisation_Applications</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Sprites\duckHor.png" />
+    <None Remove="Sprites\horizontal finish.png" />
+    <None Remove="Sprites\horizontal.png" />
+    <None Remove="Sprites\leftBottom.png" />
+    <None Remove="Sprites\lefttTop.png" />
+    <None Remove="Sprites\rightBottom.png" />
+    <None Remove="Sprites\rightTop.png" />
+    <None Remove="Sprites\Sprite-0001.png" />
+    <None Remove="Sprites\StriaghtWithHole.png" />
+    <None Remove="Sprites\tile002.png" />
+    <None Remove="Sprites\tile003.png" />
+    <None Remove="Sprites\vertical.png" />
+    <None Remove="Sprites\verticalFinished.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Sprites\duckHor.png" />
+    <Content Include="Sprites\horizontal finish.png" />
+    <Content Include="Sprites\horizontal.png" />
+    <Content Include="Sprites\leftBottom.png" />
+    <Content Include="Sprites\lefttTop.png" />
+    <Content Include="Sprites\rightBottom.png" />
+    <Content Include="Sprites\rightTop.png" />
+    <Content Include="Sprites\Sprite-0001.png" />
+    <Content Include="Sprites\StriaghtWithHole.png" />
+    <Content Include="Sprites\tile002.png" />
+    <Content Include="Sprites\tile003.png" />
+    <Content Include="Sprites\vertical.png" />
+    <Content Include="Sprites\verticalFinished.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleApp2\model.csproj" />
+  </ItemGroup>
+
+</Project>

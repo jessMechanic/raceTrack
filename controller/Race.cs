@@ -215,7 +215,7 @@ namespace model
 
         public void MovePlayers()
         {
-            Console.SetCursorPosition(0, 50);
+          
             int trackLenght = 99;
 
 
