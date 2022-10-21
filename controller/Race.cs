@@ -64,7 +64,7 @@ namespace model
         }
         private void SetTimer()
         {
-            RaceTimer = new System.Timers.Timer(500);
+            RaceTimer = new System.Timers.Timer(1000);
             RaceTimer.AutoReset = true;
             RaceTimer.Elapsed += OnTimedEvent;
 
@@ -156,11 +156,7 @@ namespace model
 
 
 
-        //
-
-        //
-        //          rework so it could loop back around
-        //
+       
         public void PlaceParticipants()
         {
             debugLines.writeLine($"placed participants for {Track.Name} : {Participants.Count}");
@@ -183,10 +179,7 @@ namespace model
                 {
                     int i = startgridPosition - (j / 2);
                     i += i < 0 ? trackSections.Count * 2 : 0;
-                    if(j == 2)
-                    {
-                        int s = 1;
-                    }
+                   
                     if (!_positions.ContainsKey(trackSections.ElementAt(i / 2)))
                     {
                         _positions.Add(trackSections.ElementAt(i / 2), new SectionData());
@@ -248,7 +241,7 @@ namespace model
                     }
 
 
-                    if (curData.DistanceLeft > trackLenght)
+                    if (curData.DistanceLeft > trackLenght )
                     {
 
                         if (nextData.Left == null || nextData.Right == null)

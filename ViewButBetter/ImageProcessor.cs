@@ -31,11 +31,8 @@ namespace Visualisation_Applications
 
             if (!SpriteReference.ContainsKey(key))
             {
-                if (File.Exists(key))
-                {
-                    throw new Exception("file does not excist");
-                }
-                SpriteReference.Add(key, new Bitmap(key));
+                
+                SpriteReference.Add(key, (Bitmap)Bitmap.FromFile(key));
             }
 
             return SpriteReference[key];
@@ -43,6 +40,10 @@ namespace Visualisation_Applications
 
         public static Bitmap GenerateBitmap(int width, int height)
         {
+            if(SpriteReference == null)
+            {
+                SpriteReference = new();
+            }
             if (!SpriteReference.ContainsKey("empty"))
             {
                 Bitmap bmp = new(width, height);

@@ -15,8 +15,8 @@ namespace controller
             competition.Tracks = new Queue<Track>();
             addRacers();
             addtracks();
-          
             
+
 
 
 
@@ -28,10 +28,12 @@ namespace controller
             if (track != null)
             {
                 CurrentRace = new Race(track, new List<IParticipant>( competition.Participants));
+                
                 InalizeVisualization?.Invoke(CurrentRace);
                 CurrentRace.PlaceParticipants();
                 CurrentRace.NextRaceEvent += CurrentRace_NextRaceEvent;
-                CurrentRace.startTimer();
+               CurrentRace.RaceTimer.Start();
+
             }
 
 

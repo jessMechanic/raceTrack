@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using controller;
+using model;
 using Visualisation_Applications;
 
 namespace ViewButBetter
@@ -23,29 +24,43 @@ namespace ViewButBetter
     /// </summary>
     public partial class MainWindow : Window
     {
-    
+
         public EventHandler driverChange;
         public MainWindow()
         {
             Data.Initialize();
-           // Data.InalizeVisualization += ;
-          
+
+            
+            Data.InalizeVisualization += Visualisation.PreCalculateGrid;
+
             Data.NextRace();
-            Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
+
+            Data.CurrentRace.RaceTimer.Elapsed += CurrentRace_DriversChanged;
             InitializeComponent();
         }
 
-        private void CurrentRace_DriversChanged(object? sender, model.DriversChangedEventArgs e)
+        public void CurrentRace_DriversChanged(object? sender, EventArgs e)
         {
             this.Image.Dispatcher.BeginInvoke(
             DispatcherPriority.Render,
             new Action(() =>
-    {
-        this.Image.Source = null;
-        this.Image.Source = Visualisation.DrawTrack(Data.CurrentRace.Track);
-    }));
+            {
+            this.Image.Source = null;
+            this.Image.Source = Visualisation.DrawTrack(Data.CurrentRace.Track);
+            }));
+        }
+        public void ChangeRaceEvent(Race race)
+        {
+            
+              
+               
+
+            
+            race.RaceTimer.Elapsed += CurrentRace_DriversChanged;
+            race.DriversChanged += CurrentRace_DriversChanged;
+           
         }
 
-        
+
     }
 }

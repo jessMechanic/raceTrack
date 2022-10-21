@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid OpacityMask="#FF310808" Background="#FF8ABB67">
-        <Image x:Name="Image" OpacityMask="Black" Width="800" Height="400"/>
+        <Image x:Name="Image" OpacityMask="Black" Width="800" Margin="0,0,0,8" HorizontalAlignment="Left" RenderOptions.BitmapScalingMode="NearestNeighbor" />
     </Grid>
 </Window>

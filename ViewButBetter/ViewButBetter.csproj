@@ -8,6 +8,64 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Sprites\duckHor.png" />
+    <None Remove="Sprites\horizontal finish.png" />
+    <None Remove="Sprites\horizontal.png" />
+    <None Remove="Sprites\leftBottom.png" />
+    <None Remove="Sprites\lefttTop.png" />
+    <None Remove="Sprites\rightBottom.png" />
+    <None Remove="Sprites\rightTop.png" />
+    <None Remove="Sprites\Sprite-0001.png" />
+    <None Remove="Sprites\StriaghtWithHole.png" />
+    <None Remove="Sprites\tile002.png" />
+    <None Remove="Sprites\tile003.png" />
+    <None Remove="Sprites\vertical.png" />
+    <None Remove="Sprites\verticalFinished.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Sprites\duckHor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\horizontal finish.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\horizontal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\leftBottom.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\lefttTop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\rightBottom.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\rightTop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Sprite-0001.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\StriaghtWithHole.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\tile002.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\tile003.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\vertical.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\verticalFinished.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
