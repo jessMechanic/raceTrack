@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,7 +26,13 @@ namespace ViewButBetter
     public partial class MainWindow : Window
     {
 
-        public EventHandler driverChange;
+     
+        public  Timer AnimationTimer;
+        static int AnimationFrames = 4;
+
+        private bool _active;
+        private CompetitionStatistics _compStatistic;
+        private RaceStatistics _raceStatistics;
         public MainWindow()
         {
             Data.Initialize();
@@ -36,18 +43,43 @@ namespace ViewButBetter
             Data.NextRace();
 
             Data.CurrentRace.RaceTimer.Elapsed += CurrentRace_DriversChanged;
+
+            _active = false;
+            SetTimer();
+            startTimer();
+
             InitializeComponent();
         }
 
+        #region TimerFunctions
+        public  void startTimer()
+        {
+            AnimationTimer.Start();
+        }
+        private  void SetTimer()
+        {
+            AnimationTimer = new System.Timers.Timer(100);
+            AnimationTimer.AutoReset = true;
+            AnimationTimer.Elapsed += CurrentRace_DriversChanged;
+
+
+        }
+
+       
+        #endregion TimerFunctions
+
+
         public void CurrentRace_DriversChanged(object? sender, EventArgs e)
         {
+           if(this.Image != null) { 
             this.Image.Dispatcher.BeginInvoke(
             DispatcherPriority.Render,
             new Action(() =>
             {
             this.Image.Source = null;
             this.Image.Source = Visualisation.DrawTrack(Data.CurrentRace.Track);
-            }));
+            }));}
+           
         }
         public void ChangeRaceEvent(Race race)
         {
@@ -61,6 +93,19 @@ namespace ViewButBetter
            
         }
 
-
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        private void Open_Race_Statis(object sender, RoutedEventArgs e)
+        {
+            _raceStatistics = new();
+            _raceStatistics.Show();
+        }
+        private void Open_Racer_Statis(object sender, RoutedEventArgs e)
+        {
+            _compStatistic = new();
+            _compStatistic.Show();
+        }
     }
 }

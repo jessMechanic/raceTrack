@@ -27,7 +27,7 @@ namespace model
 
         public int speed()
         {
-            return 100;
+            return Equipment.Speed;
 
         }
     }

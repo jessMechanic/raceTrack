@@ -27,12 +27,15 @@ namespace controller
             Track track = competition.NextTrack();
             if (track != null)
             {
+                competition.UpdatePoints();
+
                 CurrentRace = new Race(track, new List<IParticipant>( competition.Participants));
                 
                 InalizeVisualization?.Invoke(CurrentRace);
                 CurrentRace.PlaceParticipants();
                 CurrentRace.NextRaceEvent += CurrentRace_NextRaceEvent;
                CurrentRace.RaceTimer.Start();
+                
 
             }
 
@@ -40,7 +43,7 @@ namespace controller
 
         }
 
-        private static void CurrentRace_NextRaceEvent(object? sender, NextRaceEventArg e)
+        public static void CurrentRace_NextRaceEvent(object? sender, NextRaceEventArg e)
         {
             NextRace();
         }
@@ -52,7 +55,8 @@ namespace controller
             addParticipants(new Driver("goose", 1, new Duck(100), TeamColors.Red));
             addParticipants(new Driver("swan", 1, new Duck(100), TeamColors.Yellow));
             addParticipants(new Driver("swan", 1, new Duck(100), TeamColors.Cyan));
-          
+           
+
 
 
 
@@ -78,18 +82,17 @@ namespace controller
             river.Rounds = 1;
 
 
-            SectionTypes[] Sections4 = { SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.StartGrid, SectionTypes.RightCornor, SectionTypes.RightCornor,SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor };
+            SectionTypes[] Sections4 = {  SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.StartGrid, SectionTypes.RightCornor, SectionTypes.RightCornor,SectionTypes.Straight };
             Track babyPark = (new Track("BabyPart", Sections4));
             babyPark.Rounds = 1;
             babyPark.startDirection = new System.Numerics.Vector2(0, 1);
 
 
-
+            competition.Tracks.Enqueue(babyPark);
             competition.Tracks.Enqueue(ball);
             competition.Tracks.Enqueue(river);
-            competition.Tracks.Enqueue(babyPark);
             competition.Tracks.Enqueue(ThePond);
-
+             
 
 
 

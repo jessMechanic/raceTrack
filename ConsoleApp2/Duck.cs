@@ -7,20 +7,30 @@ using System.Threading.Tasks;
 namespace model
 {
     public class Duck : IEquipment
+
     {
-           public String toString()
+        static Random _R = new Random();
+        static T RandomEnumValue<T>()
+        {
+            var v = Enum.GetValues(typeof(T));
+            return (T)v.GetValue(_R.Next(v.Length));
+        }   
+
+
+        public String toString()
         {
             return ($"Duck [ Quality: {Quality} , performance : {Performance}   ]");
         }
 
         public Duck(int speed)
         {
-            Quality = 80;
+            Quality = 100;
             Performance = 1;
             Speed = speed;
             isBroken = false;
          
             FixChange = 80;
+            PartCostume = RandomEnumValue<Cosume>();
         }
         public Duck(int speed,int quality,int fixChange)
         {
@@ -30,6 +40,7 @@ namespace model
             isBroken = false;
 
             FixChange = fixChange;
+            PartCostume = RandomEnumValue<Cosume>();
         }
         public Duck()
         {
@@ -39,6 +50,7 @@ namespace model
             isBroken = false;
     
             FixChange = 80;
+            PartCostume = RandomEnumValue<Cosume>();
         }
 
         public int Quality { get; set; }
@@ -47,5 +59,6 @@ namespace model
         public bool isBroken { get  ; set ; }
 
         public int FixChange { get; set; }
+        public Cosume PartCostume { get; set; }
     }
 }

@@ -1,27 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-
 using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Color = System.Drawing.Color;
 
 namespace Visualisation_Applications
 {
-   public static class ImageProcessor
+    public static class ImageProcessor
     {
         private static Dictionary<string, Bitmap> SpriteReference;
 
 
-         public static void Clear()
+        public static void Clear()
         {
             SpriteReference.Clear();
         }
+        public static void ClearEmpty()
+        {
+            if (SpriteReference != null)
+            {
+                if (SpriteReference.ContainsKey("empty"))
+                {
+                    SpriteReference.Remove("empty");
+                }
+            }
 
+        }
         public static Bitmap GetBitmap(string key)
         {
             if (SpriteReference == null)
@@ -31,7 +37,7 @@ namespace Visualisation_Applications
 
             if (!SpriteReference.ContainsKey(key))
             {
-                
+
                 SpriteReference.Add(key, (Bitmap)Bitmap.FromFile(key));
             }
 
@@ -40,7 +46,7 @@ namespace Visualisation_Applications
 
         public static Bitmap GenerateBitmap(int width, int height)
         {
-            if(SpriteReference == null)
+            if (SpriteReference == null)
             {
                 SpriteReference = new();
             }
@@ -85,6 +91,29 @@ namespace Visualisation_Applications
             {
                 bitmap.UnlockBits(bitmapData);
             }
+
+        }
+
+
+        public static Bitmap ColorReplace(Bitmap bmp, Color oldColor, Color newColor)
+        {   Bitmap returmImg = new Bitmap(bmp.Width, bmp.Height);
+            for (int y = 0; y < returmImg.Height; y++)
+            {
+                for (int x = 0; x < returmImg.Width; x++)
+                {
+                    if (bmp.GetPixel(x, y) == oldColor)
+                    {
+                        returmImg.SetPixel(x, y, newColor);
+                    }
+                    else
+                    {
+                        returmImg.SetPixel(x, y, bmp.GetPixel(x, y));
+                    }
+
+
+                }
+            }
+            return returmImg;
         }
     }
 

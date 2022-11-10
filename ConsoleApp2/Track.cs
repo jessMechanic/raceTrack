@@ -12,7 +12,6 @@ namespace model
     {
         public string Name { get; set; }
         public LinkedList<Section> Sections { get; set; }
-        public Voliage[] VoliagesTrack;
         public Vector2 startDirection;
         public ConsoleColor ThemeColor;
         public ConsoleColor TrackBoundry;

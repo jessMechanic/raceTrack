@@ -14,13 +14,15 @@ using System.Timers;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 using ViewButBetter;
+using Track = model.Track;
+using Timer = System.Timers.Timer;
 
 namespace Visualisation_Applications
 {
     static class Visualisation
     {
         static int timer = 0;
-
+        static int animationFrame = 0;
         #region graphics
         const string straight_horizontal = ".\\Sprites\\horizontal.png";
         const string straight_vertical = ".\\Sprites\\vertical.png";
@@ -37,20 +39,22 @@ namespace Visualisation_Applications
         static Dictionary<Section, TileData> GridData;
         static Vector2 GridSize;
         static Vector2 GridOffset;
-
+        static Track _track;
 
 
 
         public static BitmapSource DrawTrack(model.Track track)
         {
-            LinkedList<Section> sections = track.Sections;
-            Bitmap image = ImageProcessor.GenerateBitmap((int)GridSize.X * 32, (int)GridSize.Y * 32);
+            animationFrame++;
+            LinkedList<Section> sections = _track.Sections;
+            Bitmap image = ImageProcessor.GenerateBitmap((int)GridSize.X * 32 , (int)GridSize.Y * 32);
             Graphics G = Graphics.FromImage(image);
 
             for (int i = sections.Count; i-- > 0;)
             {
                 Section curSection = sections.ElementAt(i);
                 SectionData SD = Data.CurrentRace.GetSectionData(curSection);
+                if(GridData.ContainsKey(curSection)) { 
                 TileData curTile = GridData[curSection];
 
 
@@ -58,19 +62,19 @@ namespace Visualisation_Applications
 
                 if (SD.Left != null)
                 {
-                    Image img = ImageProcessor.GetBitmap(".\\Sprites\\duckHor.png");
-                    G.DrawImage(img, new Point((int)curTile.InnerAbsolute.X, (int)curTile.InnerAbsolute.Y));
+                    Image img = SD.Left.Equipment.isBroken ? ImageProcessor.GetBitmap($".\\Sprites\\animations\\broken{animationFrame   % 3 + 1}.png") : ImageProcessor.GetBitmap($".\\Sprites\\animations\\{SD.Left.Equipment.PartCostume}{animationFrame % 5 + 1}.png");
+                        Image Coloredimg = ImageProcessor.ColorReplace((Bitmap)img, Color.FromArgb(128, 255, 0), SD.Left.TeamColor.toColor());
+                    G.DrawImage(Coloredimg, new Point((int)(curTile.InnerAbsolute.X - GridOffset.X * 32), (int)(curTile.InnerAbsolute.Y - GridOffset.Y * 32)));
                 }
                 if (SD.Right != null)
                 {
-                    Image img = ImageProcessor.GetBitmap(".\\Sprites\\duckHor.png");
-                    G.DrawImage(img, new Point((int)curTile.OuterAbsolute.X, (int)curTile.OuterAbsolute.Y));
-                   /* if (i > 10)
-                    {
-                        int c = 0;
-                    }*/
+                    Image img = SD.Right.Equipment.isBroken ? ImageProcessor.GetBitmap($".\\Sprites\\animations\\broken{animationFrame % 3 + 1}.png") : ImageProcessor.GetBitmap($".\\Sprites\\animations\\{SD.Right.Equipment.PartCostume}{animationFrame % 5 + 1}.png");
+                   Image  Coloredimg = ImageProcessor.ColorReplace((Bitmap)img, Color.FromArgb(128, 255, 0), SD.Right.TeamColor.toColor());
+                    G.DrawImage(Coloredimg, new Point((int)(curTile.OuterAbsolute.X - GridOffset.X * 32), (int)(curTile.OuterAbsolute.Y - GridOffset.Y * 32)));
+                    
                 }
 
+                }
             }
             timer++;
             return ImageProcessor.CreateBitmapSourceFromGdiBitmap(image);
@@ -78,14 +82,15 @@ namespace Visualisation_Applications
 
         public static void PreCalculateGrid(Race race)
         {
+            ImageProcessor.ClearEmpty();
 
-            model.Track track = race.Track;
-            if (track != null)
+            _track = race.Track;
+            if (_track != null)
             {
                 GridData = new Dictionary<Section, TileData>();
                 Vector2 position = new();
-                Vector2 direction = track.startDirection;
-                LinkedList<Section> sections = track.Sections;
+                Vector2 direction = _track.startDirection;
+                LinkedList<Section> sections = _track.Sections;
                 int MinX = 0;
                 int MinY = 0;
                 int MaxX = 0;
@@ -102,7 +107,7 @@ namespace Visualisation_Applications
                     SectionTypes curSectionType = curSection.SectionType;
                     string spritePath = SelectSectionSprite(ref direction, curSectionType);
 
-                    Vector2[] sides = CalcPosSides(curSectionType, direction);
+                    Vector2[] sides = CalcPosSides(spritePath, direction);
                     GridData.Add(curSection, new TileData(spritePath, position, sides[0], sides[1]));
 
                     position += direction;
@@ -234,7 +239,7 @@ namespace Visualisation_Applications
             }
             return sectionToDraw;
         }
-        private static Vector2[] CalcPosSides(SectionTypes sectionTypes, Vector2 direction)
+        private static Vector2[] CalcPosSides(String sectionTypes, Vector2 direction)
         {
             Vector2[] sides = new Vector2[2];
 
@@ -242,67 +247,54 @@ namespace Visualisation_Applications
             {
 
 
-                case SectionTypes.StartGrid:
-                case SectionTypes.Finish:
-                case SectionTypes.Straight:
+                case Start_horizontal:
+                case straight_horizontal:
+                {
+                       
+                            sides[0] = new Vector2(2, 9);
+                            sides[1] = new Vector2(24, 13);
 
+                            break;
+                      
+                    }
+                case Start_vertical:
+                case straight_vertical:
                     {
-                        if (Math.Abs(direction.Y) == 1)
-                        {
-                            // Start_vertical;
-                            sides[0] = new Vector2(16, 18);
-                            sides[1] = new Vector2(8, 6);
-
+                        
+                            sides[0] = new Vector2(10, 8);
+                            sides[1] = new Vector2(17, 18);
                             break;
-                        }
-                        if (Math.Abs(direction.X) == 1)
-                        {
-                            // Start_horizontal;
-                            sides[0] = new Vector2(1, 4);
-                            sides[1] = new Vector2(22, 1);
-                            break;
-                        }
+                       
+                    }
+                case turnDown_Left:
+                    {
+                        sides[0] = new Vector2(16, 10);
+                        sides[1] = new Vector2(7, 28);
                         break;
                     }
-                case SectionTypes.LeftCornor:
-                case SectionTypes.RightCornor:
+              
+                case turnUp_Right:
                     {
-                        if (direction.X == 1)
-                        {
-                            //turnDown_Left;
-                            sides[0] = new Vector2(16, 20);
-                            sides[1] = new Vector2(3, 1);
-                            break;
-                        }
-
-                        if (direction.X == -1)
-                        {
-                            //turnUp_Right;
-                            sides[0] = new Vector2(23, 4);
-                            sides[1] = new Vector2(8, 1);
-                            break;
-                        }
-                        if (direction.Y == -1)
-                        {
-                            //turnDown_Right;
-                            sides[0] = new Vector2(8, 20);
-                            sides[1] = new Vector2(22, 1);
-                            break;
-                        }
-
-                        if (direction.Y == 1)
-                        {
-                            //turnUp_Left;
-                            sides[0] = new Vector2(0, 5);
-                            sides[1] = new Vector2(17, 1);
-                            break;
-                        }
+                        sides[0] = new Vector2(10, 2);
+                        sides[1] = new Vector2(20, 13);
+                        break;
+                    } 
+                case turnUp_Left:
+                    {
+                        sides[0] = new Vector2(2, 12);
+                        sides[1] = new Vector2(15,8);
+                        break;
+                    }
+                case turnDown_Right:
+                    {
+                        sides[0] = new Vector2(19, 28);
+                        sides[1] = new Vector2(11,11);
                         break;
                     }
                 default:
                     {
-                        sides[0] = new Vector2(10, 10);
-                        sides[1] = new Vector2(20, 20);
+                        sides[0] = new Vector2(16, 10);
+                        sides[1] = new Vector2(7, 28);
                         break;
                     }
 

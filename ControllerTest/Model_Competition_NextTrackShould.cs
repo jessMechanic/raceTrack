@@ -12,7 +12,7 @@ namespace ControllerTest
     [TestFixture]
     public class Model_Competition_NextTrackShould
     {
-         Competition _competition;
+        Competition _competition;
         Track track0;
 
         [SetUp]
@@ -45,7 +45,7 @@ namespace ControllerTest
         public void NextTrack_OneInQueue_RemoveTrackFromQueue()
         {
             SectionTypes[] Sections0 = { SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Finish };
-            Track track = (new Track("the pond",Sections0));
+            Track track = (new Track("the pond", Sections0));
             _competition.Tracks.Enqueue(track);
 
             Track results = _competition.NextTrack();
@@ -53,7 +53,7 @@ namespace ControllerTest
             results = _competition.NextTrack();
             Assert.IsNull(results);
         }
-         [Test]
+        [Test]
         public void NextTrack_TwoInQueue_ReturnNextTrack()
         {
             SectionTypes[] Sections0 = { SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Finish };
@@ -71,14 +71,61 @@ namespace ControllerTest
         public void PlaceParticipants()
         {
             _competition.Participants = new List<IParticipant>();
-            for(int i = 0; i < 10; i++) { 
+            for (int i = 0; i < 10; i++) {
                 _competition.Participants.Add(new Driver("duck", 1, new Duck(), TeamColors.Blue));
             }
-            
-            
+              Race testRace = new Race(track0, _competition.Participants);
+           
+            try
+            {   testRace.PlaceParticipants();
+                
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Expected no exception, but got: " + ex.Message);
+            }
+
+           
+           
+        }
+
+        [Test]
+        public void AddPointsOfUnknownPlayer()
+        {
+           Driver unknown = new Driver("unknown", 1,new Duck(),TeamColors.Blue);
+            _competition.AddPoints(unknown,10);
+            _competition.UpdatePoints();
+            Assert.IsTrue(_competition.Points.ContainsKey(unknown));
+        }
+
+        [Test]
+        public void RandomizeEquepment()
+        {
+            _competition.Participants = new List<IParticipant>();
+            for (int i = 0; i < 10; i++)
+            {
+                _competition.Participants.Add(new Driver("duck", 1, new Duck(), TeamColors.Blue));
+            }
+            Race testRace = new Race(track0, _competition.Participants);
+            int perf = testRace.Participants.First().Equipment.Performance;
+
+            testRace.RandomizeEquipment();
+            Assert.That(testRace.Participants.First().Equipment.Performance, Is.Not.EqualTo(perf));
+        }
+
+        [Test]
+        public void FinishedRace()
+        {
+            _competition.Participants = new List<IParticipant>();
+            _competition.Participants.Add(new Driver("duck", 1, new Duck(), TeamColors.Blue));
+              
+            Track testTrack = new("testTrack",new SectionTypes[] {SectionTypes.Finish})  ;
             Race testRace = new Race(track0, _competition.Participants);
             testRace.PlaceParticipants();
-          
+
+            testRace.PlayersFinished();
+           
+            Assert.IsEmpty(testRace.Participants);
         }
     }
 }

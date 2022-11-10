@@ -1,0 +1,26 @@
+﻿<Window x:Class="ViewButBetter.CompetitionStatistics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViewButBetter" xmlns:controller="clr-namespace:controller;assembly=controller"
+        mc:Ignorable="d"
+        Title="Competition statistics" Height="450" Width="297">
+    <Window.DataContext>
+        <controller:DataContext/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="263*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="places" Margin="4,0,209,405" Grid.ColumnSpan="3" Grid.Column="2"/>
+        <Label Content="{Binding TracksToGo, Mode=OneWay}" HorizontalAlignment="Left" Margin="129,34,0,0" VerticalAlignment="Top" Width="124" Height="150" Background="#FFCCCCCC" Grid.Column="4"/>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5,34,139,186" ItemsSource="{Binding points, Mode=OneWay}" Grid.ColumnSpan="3" Grid.Column="2"/>
+
+
+    </Grid>
+</Window>

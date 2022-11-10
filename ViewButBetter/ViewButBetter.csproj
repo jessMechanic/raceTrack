@@ -8,6 +8,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Sprites\animations\ball1.png" />
+    <None Remove="Sprites\animations\ball2.png" />
+    <None Remove="Sprites\animations\ball3.png" />
+    <None Remove="Sprites\animations\ball4.png" />
+    <None Remove="Sprites\animations\ball5.png" />
+    <None Remove="Sprites\animations\broken1.png" />
+    <None Remove="Sprites\animations\broken2.png" />
+    <None Remove="Sprites\animations\broken3.png" />
+    <None Remove="Sprites\animations\dapper1.png" />
+    <None Remove="Sprites\animations\dapper2.png" />
+    <None Remove="Sprites\animations\dapper3.png" />
+    <None Remove="Sprites\animations\dapper4.png" />
+    <None Remove="Sprites\animations\dapper5.png" />
+    <None Remove="Sprites\animations\duck1.png" />
+    <None Remove="Sprites\animations\duck2.png" />
+    <None Remove="Sprites\animations\duck3.png" />
+    <None Remove="Sprites\animations\duck4.png" />
+    <None Remove="Sprites\animations\duck5.png" />
+    <None Remove="Sprites\animations\goose1.png" />
+    <None Remove="Sprites\animations\goose2.png" />
+    <None Remove="Sprites\animations\goose3.png" />
+    <None Remove="Sprites\animations\goose4.png" />
+    <None Remove="Sprites\animations\goose5.png" />
+    <None Remove="Sprites\animations\swan1.png" />
+    <None Remove="Sprites\animations\swan2.png" />
+    <None Remove="Sprites\animations\swan3.png" />
+    <None Remove="Sprites\animations\swan4.png" />
+    <None Remove="Sprites\animations\swan5.png" />
     <None Remove="Sprites\duckHor.png" />
     <None Remove="Sprites\horizontal finish.png" />
     <None Remove="Sprites\horizontal.png" />
@@ -24,6 +52,90 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Sprites\animations\ball1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\ball2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\ball3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\ball4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\ball5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\broken1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\broken2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\broken3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\dapper1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\dapper2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\dapper3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\dapper4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\dapper5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\duck1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\duck2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\duck3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\duck4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\duck5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\goose1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\goose2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\goose3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\goose4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\goose5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\swan1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\swan2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\swan3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\swan4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\animations\swan5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Sprites\duckHor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -72,6 +184,19 @@
   <ItemGroup>
     <ProjectReference Include="..\ConsoleApp2\model.csproj" />
     <ProjectReference Include="..\controller\controller.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CompetitionStatistics.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="CompetitionStatistics.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

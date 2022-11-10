@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace model
 {
+    public enum Cosume
+    {
+        duck,
+        goose,
+        swan    ,
+        dapper
+    }
     public interface IEquipment
     {
         public int Quality { get; set; }
@@ -14,5 +21,7 @@ namespace model
      
         public int FixChange { get; set; }
         public bool isBroken { get; set; }
+
+        public Cosume PartCostume { get; set; }
     }
 }
