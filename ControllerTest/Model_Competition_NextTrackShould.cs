@@ -3,15 +3,22 @@ using model;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
+using Section = model.Section;
 
 namespace ControllerTest
 {
     [TestFixture]
     public class Model_Competition_NextTrackShould
     {
+
+        private Race _race;
+        private Track _t;
+
         Competition _competition;
         Track track0;
 
@@ -22,6 +29,14 @@ namespace ControllerTest
             _competition.Tracks = new Queue<Track>();
             SectionTypes[] Sections0 = { SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.LeftCornor, SectionTypes.Finish };
             track0 = (new Track("the pond", Sections0));
+            _competition.Participants = new();
+            _competition.Participants.Add(new Driver("duck", 1, new Duck(), TeamColors.Blue));
+            SectionTypes[] Sections4 = { SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.StartGrid, SectionTypes.RightCornor, SectionTypes.RightCornor, SectionTypes.Straight };
+            Track babyPark = (new Track("BabyPart", Sections4));
+
+
+
+            _race = new Race(babyPark, _competition.Participants);
         }
 
         [Test]
@@ -71,29 +86,31 @@ namespace ControllerTest
         public void PlaceParticipants()
         {
             _competition.Participants = new List<IParticipant>();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++)
+            {
                 _competition.Participants.Add(new Driver("duck", 1, new Duck(), TeamColors.Blue));
             }
-              Race testRace = new Race(track0, _competition.Participants);
-           
+            Race testRace = new Race(track0, _competition.Participants);
+
             try
-            {   testRace.PlaceParticipants();
-                
+            {
+                testRace.PlaceParticipants();
+
             }
             catch (Exception ex)
             {
                 Assert.Fail("Expected no exception, but got: " + ex.Message);
             }
 
-           
-           
+
+
         }
 
         [Test]
         public void AddPointsOfUnknownPlayer()
         {
-           Driver unknown = new Driver("unknown", 1,new Duck(),TeamColors.Blue);
-            _competition.AddPoints(unknown,10);
+            Driver unknown = new Driver("unknown", 1, new Duck(), TeamColors.Blue);
+            _competition.AddPoints(unknown, 10);
             _competition.UpdatePoints();
             Assert.IsTrue(_competition.Points.ContainsKey(unknown));
         }
@@ -116,16 +133,34 @@ namespace ControllerTest
         [Test]
         public void FinishedRace()
         {
-            _competition.Participants = new List<IParticipant>();
-            _competition.Participants.Add(new Driver("duck", 1, new Duck(), TeamColors.Blue));
-              
-            Track testTrack = new("testTrack",new SectionTypes[] {SectionTypes.Finish})  ;
-            Race testRace = new Race(track0, _competition.Participants);
-            testRace.PlaceParticipants();
 
-            testRace.PlayersFinished();
-           
-            Assert.IsEmpty(testRace.Participants);
+            _race.NextRaceEvent += (_, _) =>
+            {
+                foreach (IParticipant participant in Data.competition.Participants)
+                {
+                    Assert.That(participant.Points, Is.Not.Zero);
+                }
+            };
+
+            _race.RaceTimer.Start();
+
+            // wait 50 sec
+            Thread.Sleep(50000);
+
+
+
+            //check if theres an active racer
+            foreach (Section section in _race.Track.Sections)
+                {
+                    SectionData sectionData = _race.GetSectionData(section);
+                    Assert.That(sectionData.Left, Is.Null);
+                    Assert.That(sectionData.Right, Is.Null);
+
+                }
+            }
+
+
         }
+
+
     }
-}

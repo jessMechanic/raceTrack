@@ -27,6 +27,7 @@ namespace model
         public bool Busy = false;
         public Dictionary<IParticipant, float> FastestRoundTime;
         public List<string> places;
+        public bool Finished = false;
         //public delegate void OnTimedEvent();
         #endregion PublicVariables
 
@@ -79,6 +80,7 @@ namespace model
             AddLapTime();
             if (Participants.Count <= 0)
             {
+                Finished = true;
                 RaceTimer.Stop();
                 NextRaceEvent?.Invoke(this, new model.NextRaceEventArg(Track));
             }
@@ -131,7 +133,7 @@ namespace model
         #region Participants
 
 
-
+                                                                                 
         public void PlaceParticipants()
         {
             debugLines.writeLine($"placed participants for {Track.Name} : {Participants.Count}");
@@ -183,7 +185,7 @@ namespace model
                 }
                 if (curData.Left != null)
                 {
-                    places.Add(curData.Left.Name);
+                    places.Add(curData.Left.TeamColor.ToString());
                     UpdateDriverMoved(curData.Left, false);
                     if (!curData.Left.Equipment.isBroken)
                     {
@@ -212,7 +214,7 @@ namespace model
                 }
                 if (curData.Right != null)
                 {
-                    places.Add(curData.Right.Name);
+                    places.Add(curData.Right.TeamColor.ToString());
                     UpdateDriverMoved(curData.Right, false);
                     if (!curData.Right.Equipment.isBroken)
                     {

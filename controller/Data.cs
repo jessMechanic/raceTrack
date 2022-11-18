@@ -66,7 +66,7 @@ namespace controller
 
             SectionTypes[] Sections1 = {SectionTypes.Straight,SectionTypes.Straight, SectionTypes.StartGrid, SectionTypes.LeftCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.Straight, SectionTypes.RightCornor, SectionTypes.RightCornor };
 
-
+           
 
 
             Track ThePond = (new Track("the pond", Sections1));
@@ -87,7 +87,7 @@ namespace controller
             babyPark.Rounds = 1;
             babyPark.startDirection = new System.Numerics.Vector2(0, 1);
 
-
+            
             competition.Tracks.Enqueue(babyPark);
             competition.Tracks.Enqueue(ball);
             competition.Tracks.Enqueue(river);
